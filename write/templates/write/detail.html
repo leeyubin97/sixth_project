@@ -1,0 +1,26 @@
+<div>
+    <h1> {{post.title}}</h1>
+    <a href= "{% url 'edit' post.id %}">수정</a>
+    <a href= "{% url 'delete' post.id %}">삭제</a>
+    <a href= "{% url 'home'%}">홈으로</a>
+    <p> {{post.text}} </p>
+</div>
+
+{% for comment in post.comments.all %}
+<div>
+    <div>{{comment.nickname}}</div>
+    {{comment.text}}
+    <a href="{% url 'comment_delete' comment_id=comment.id %}">댓글 삭제</a>
+</div>
+{% empty %}
+<p>아무 댓글이 없어요</p>
+{% endfor %}
+
+<div class="form-group">
+    <form method="POST" action="{% url 'add_comment' post.id %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type = "submit" class="save btn btn-default">댓글 쓰기</button>
+    </form>
+
+</div>
