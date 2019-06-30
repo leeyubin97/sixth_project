@@ -8,7 +8,7 @@ class CreateUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "email", "nickname", "password", "password2")
+        fields = ("username", "email", "nickname",)
 
     def save(self, commit=True):
         user = super(CreateUserForm, self).save(commit=False)

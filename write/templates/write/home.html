@@ -13,22 +13,25 @@
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     
-    <div style ="margin-left: 30px; margin-top: 30px">
+    <div style ="margin-left: 50px; margin-right: 50px; margin-top: 30px">
     {% if user.is_active %}
-    <h4 style="display:inline;">이유빈 </h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-    <h4 style="display:inline;"> {{user.username}} {{user.nickname}} <a href="{% url 'logout'%}">logout</a></h4>
+    <h4 style="display:inline; float:left;">이유빈 </h4> 
+    <h4 style="display:inline; float:right;"> {{user.username}} {{user.nickname}} <a a style="padding:10px;" href="{% url 'logout'%}">logout</a></h4>
     {% else %}
-    <h4> 이유빈 <a href="{% url 'accounts:signup'%}">signup</a>
-        <a href="{% url 'login'%}">login</a> </h4>
+    <h4 style="display:inline; float:left;"> 이유빈 </h4>
+    <h4 style="display:inline; float:right;"><a style="padding:10px;" href="{% url 'accounts:signup'%}">signup</a> <a style="padding:10px;" href="{% url 'login'%}">login</a> </h4>
     {% endif %}
 
     <br>
+    <br>
     {% for post in posts.all %}
         <table class="table"><strong>
-            <h3><a href="{% url 'detail' post.id %}"> {{post.title|truncatechars_html:6}} </a> </h3>
+            <h3 class="text-center" ><a href="{% url 'detail' post.id %}"> {{post.title|truncatechars_html:6}} </a> </h3>
         </strong> </table>
     {% endfor %}
-    <a href="{% url 'new' %}" button style="width:200px;height:30px;" class="btn btn-primary" >글쓰기</a>
+    <div style="position: absolute; left:45%; bottom: 0px;">
+    <a href="{% url 'new' %}" button style="width:100px;height:30px;" class="btn btn-primary">글쓰기</a>
+    </div>
     </div>
 </body>
 </html>
