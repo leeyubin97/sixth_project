@@ -1,26 +1,43 @@
-<div>
-    <h1> {{post.title}}</h1>
-    <a href= "{% url 'edit' post.id %}">수정</a>
-    <a href= "{% url 'delete' post.id %}">삭제</a>
-    <a href= "{% url 'home'%}">홈으로</a>
-    <p> {{post.text}} </p>
-</div>
+<head>
+</head>
+<body>
+<div style ="margin-left: 30px; margin-top: 30px">
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-{% for comment in post.comments.all %}
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <div>
-    <div>{{comment.nickname}}</div>
-    {{comment.text}}
-    <a href="{% url 'comment_delete' comment_id=comment.id %}">댓글 삭제</a>
+    <h3> <strong>{{post.title}}</strong> </h3>
+    <a href= "{% url 'edit' post.id %}" button style="height:33px;" class="btn btn-primary" >수정</a>
+    <a href= "{% url 'delete' post.id %}" button style="height:33px;" class="btn btn-primary">삭제</a>
+    <a href= "{% url 'home'%}" button style="height:33px;" class="btn btn-primary">홈으로</a>
+</div>
+    <br>
+    <div style= "border: 3px solid; text-align:center; height: 200px; width: 400px; padding:10px;">
+        <p>{{post.text}}</p>
+    </div> 
+
+<br>
+<br>
+<br>
+{% for comment in post.comments.all %}
+<div style= "border: 1px solid; height: auto; width: 400px; padding:10px;">
+    {{comment.nickname}} ; {{comment.text}} &nbsp; &nbsp;<a href="{% url 'comment_delete' comment_id=comment.id %}" button style="height:33px;" class="btn btn-default">삭제</a>
 </div>
 {% empty %}
-<p>아무 댓글이 없어요</p>
+<h5><strong> !! 아무 댓글이 없어요 !! </strong></h5>
 {% endfor %}
-
+<br>
 <div class="form-group">
     <form method="POST" action="{% url 'add_comment' post.id %}">
         {% csrf_token %}
         {{form.as_p}}
-        <button type = "submit" class="save btn btn-default">댓글 쓰기</button>
+        <button type = "submit" button style="height:33px;"class="save btn btn-primary">작성</button>
     </form>
-
 </div>
+</div>
+</body>
